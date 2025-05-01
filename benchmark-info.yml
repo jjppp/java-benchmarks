@@ -138,3 +138,9 @@
   main: org.jpc.j2se.JPCApplication
   apps: [ JPC/JPC.jar ]
   refl-log: JPC/refl.log
+
+- id: checkstyle
+  jdk: 6
+  main: com.puppycrawl.tools.checkstyle.Main
+  apps: [ checkstyle/checkstyle-5.7-all.jar ]
+  refl-log: checkstyle/refl.log
