@@ -104,7 +104,7 @@
 - id: columba-1.4
   jdk: 6
   main: org.columba.core.main.Main
-  apps: [ columba/1.4/columba.jar ]
+  apps: [ columba/1.4/columba.jar, columba/1.4/lib/ristretto-1.2-all.jar ]
   libs:
     - columba/1.4/lib
     - columba/1.4/native/linux
