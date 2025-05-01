@@ -144,3 +144,4 @@
   main: com.puppycrawl.tools.checkstyle.Main
   apps: [ checkstyle/checkstyle-5.7-all.jar ]
   refl-log: checkstyle/refl.log
+  phantom: true
