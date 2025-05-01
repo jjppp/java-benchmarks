@@ -132,3 +132,9 @@
   apps: [ briss/0.9/briss-0.9.jar ]
   libs: [ briss/0.9 ]
   refl-log: briss/0.9/refl.log
+
+- id: JPC
+  jdk: 6
+  main: org.jpc.j2se.JPCApplication
+  apps: [ JPC/JPC.jar ]
+  refl-log: JPC/refl.log
