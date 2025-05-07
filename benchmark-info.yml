@@ -145,3 +145,17 @@
   apps: [ checkstyle/checkstyle-5.7-all.jar ]
   refl-log: checkstyle/refl.log
   phantom: true
+
+- id: batik
+  jdk: 6
+  main: org.apache.batik.apps.svgbrowser.Main
+  apps: [ batik/1.6.1/batik-squiggle.jar ]
+  libs: [ batik/1.6.1/lib ]
+  refl-log: batik/refl.log
+
+- id: sunflow
+  jdk: 6
+  main: SunflowGUI
+  apps: [ sunflow/sunflow.jar ]
+  libs: [ sunflow ]
+  refl-log: sunflow/refl.log
