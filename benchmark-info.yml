@@ -1,3 +1,27 @@
+- id: batik
+  jdk: 6
+  main: Harness
+  apps: [ dacapo-2006/batik.jar ]
+  libs: [ dacapo-2006/batik-deps.jar ]
+  refl-log: dacapo-2006/batik-refl.log
+  phantom: true
+
+- id: h2
+  jdk: 6
+  main: Harness
+  apps: [ dacapo-2006/h2.jar ]
+  libs: [ dacapo-2006/h2-deps.jar ]
+  refl-log: dacapo-2006/h2-refl.log
+  phantom: true
+
+- id: sunflow
+  jdk: 6
+  main: Harness
+  apps: [ dacapo-2006/sunflow.jar ]
+  libs: [ dacapo-2006/sunflow-deps.jar ]
+  refl-log: dacapo-2006/sunflow-refl.log
+  phantom: true
+
 - id: antlr
   jdk: 6
   main: Harness
@@ -145,17 +169,3 @@
   apps: [ checkstyle/checkstyle-5.7-all.jar ]
   refl-log: checkstyle/refl.log
   phantom: true
-
-- id: batik
-  jdk: 6
-  main: org.apache.batik.apps.svgbrowser.Main
-  apps: [ batik/1.6.1/batik-squiggle.jar ]
-  libs: [ batik/1.6.1/lib ]
-  refl-log: batik/refl.log
-
-- id: sunflow
-  jdk: 6
-  main: SunflowGUI
-  apps: [ sunflow/sunflow.jar ]
-  libs: [ sunflow ]
-  refl-log: sunflow/refl.log
