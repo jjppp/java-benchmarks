@@ -1,3 +1,28 @@
+- id: galleon
+  jdk: 6
+  main: org.lnicholls.galleon.server.Server
+  apps: [ galleon/2.3.0/lib/galleon.jar ]
+  libs: [ galleon/2.3.0/lib ]
+  refl-log: galleon/2.3.0/refl.log
+  phantom: true
+
+- id: heritrix
+  jdk: 6
+  main: org.archive.crawler.Heritrix
+  apps: [ heritrix/1.14.4/heritrix.jar ]
+  libs: [ heritrix/1.14.4/lib ]
+  refl-log: heritrix/1.14.4/refl.log
+  phantom: true
+
+- id: jasperreports
+  jdk: 6
+  main: net.sf.jasperreports.view.JasperViewer
+  apps: [ jasperreports/3.7.4/jasperreports.jar ]
+  libs: [ jasperreports/3.7.4/javaflow.jar,
+          jasperreports/3.7.4/lib ]
+  refl-log: jasperreports/3.7.4/refl.log
+  phantom: true
+
 - id: batik
   jdk: 6
   main: Harness
