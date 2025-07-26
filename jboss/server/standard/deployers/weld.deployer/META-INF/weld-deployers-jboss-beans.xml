@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Weld + JBossAS integration
+-->
+<deployment xmlns="urn:jboss:bean-deployer:2.0">
+
+  <!-- Weld deployers -->
+  
+  <!-- Responsible for discovering Weld files -->
+  <bean name="WeldFilesDeployer" class="org.jboss.weld.integration.deployer.metadata.WeldFilesDeployer"/>
+
+  <!-- Responsible for discovering Weld classes -->
+  <bean name="WeldDiscoveryDeployer" class="org.jboss.weld.integration.deployer.env.WeldDiscoveryDeployer"/>
+
+  <!-- Responsible for discovering Weld classes -->
+  <bean name="EjbServicesDeployer" class="org.jboss.weld.integration.deployer.env.EjbServicesDeployer"/>
+
+  <!-- Responsible for discovering Weld classes -->
+  <bean name="FlatDeploymentDeployer" class="org.jboss.weld.integration.deployer.env.FlatDeploymentDeployer"/>
+
+  <!-- Responsible for dynamic ejb dependency creation -->
+  <bean name="DynamicDependencyCreator" class="org.jboss.weld.integration.deployer.env.DynamicDependencyCreator">
+    <constructor>
+      <parameter><inject bean="jboss.kernel:service=KernelController"/></parameter>
+    </constructor>
+  </bean>
+
+  <!-- Responsible for booting Weld -->
+  <bean name="WeldBootstrapDeployer" class="org.jboss.weld.integration.deployer.env.WeldBootstrapDeployer"/>
+  
+  <!-- Responsible for pushing the JSF faces-config.xml onto the application classpath
+-->
+  <bean name="WeldFacesIntegrationDeployer" class="org.jboss.weld.integration.deployer.cl.WeldFacesIntegrationDeployer"/>
+  
+  <!-- Responsible for pushing the webtier integration jar onto the application classpath
+-->
+<!--  <bean name="WeldWenTierIntegrationDeployer" class="org.jboss.weld.integration.deployer.cl.WeldWebTierIntegrationDeployer"/>-->
+  
+  <!-- Responsible for pushing Weld onto the application classpath -->
+  <bean name="WeldCoreIntegrationDeployer" class="org.jboss.weld.integration.deployer.cl.WeldCoreIntegrationDeployer"/>
+
+  <!-- Responsible for inserting the Weld EJB interceptor -->
+  <bean name="PostEjbJarMetadataDeployer" class="org.jboss.weld.integration.deployer.metadata.WeldEjbInterceptorMetadataDeployer"/>
+  
+  <!-- Responsible for enabling classloader isolation for Weld jars -->
+  <bean name="PostJBossMetadataDeployer" class="org.jboss.weld.integration.deployer.metadata.PostJBossMetadataDeployer"/>
+  
+  <!-- Responsible for enabling classloader isolation for Weld wars -->
+  <bean name="PostJBossWebMetadataDeployer" class="org.jboss.weld.integration.deployer.metadata.PostJBossWebMetadataDeployer"/>
+  
+  <!-- Responsible for adding the Weld listener to the Servlet -->
+  <bean name="PostWebMetadataDeployer" class="org.jboss.weld.integration.deployer.metadata.PostWebMetadataDeployer"/>
+  
+  <!-- Responsible for adding the Weld Manager object factory to JNDI -->
+   <bean name="WeldJndiBinder" class="org.jboss.weld.integration.deployer.env.WeldJndiBinder">
+      <start method="startService">
+         <parameter>java:app/BeanManager</parameter>
+         <parameter>org.jboss.weld.resources.ManagerObjectFactory</parameter>
+      </start>
+      <stop method="stopService"/>
+   </bean>
+
+  <!-- Responsible for binding bean managers -->
+  <!--<bean name="JndiBinderDeployer" class="org.jboss.weld.integration.deployer.jndi.JndiBinderDeployer"/>-->
+
+  <!-- Adds plugin to BeanMetaDataDeployer that installs WeldKernelControllerContexts -->
+  <!-- bean name="WeldBeanMetaDataDeployerPlugin" class="org.jboss.weld.integration.deployer.mc.WeldBeanMetaDataDeployerPlugin"/ -->
+  
+
+
+</deployment>

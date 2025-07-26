@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cache-configs xmlns="urn:jboss:jbosscache-core:cache-repo:3.2">
+
+    <!-- 
+       JBoss Cache configurations using the standard JBC 3.x config format
+       can be added to this file, and will usable by the AS's CacheManager
+       if the "configResource" property in the jboss-cache-manager-jboss-beans.xml
+       file's "CacheConfigurationRegistry" bean is uncommented. (It is
+       commented out by default.)
+       However, use of the microcontainer config format used in this
+       sar's jboss-cache-manager-jboss-beans.xml file is recommended.
+    -->
+    
+    <cache-config name="standard-session-cache">   
+       <locking isolationLevel="REPEATABLE_READ" lockAcquisitionTimeout="15000" 
+             nodeLockingScheme="pessimistic" useLockStriping="false"/>
+       <transaction transactionManagerLookupClass="org.jboss.cache.transaction.BatchModeTransactionManagerLookup"/>
+       <serialization useRegionBasedMarshalling="false"/>
+       <startup regionsInactiveOnStartup="false"/>
+       <clustering clusterName="${jboss.partition.name:DefaultPartition}-SessionCache" mode="replication">
+         <stateRetrieval fetchInMemoryState="true" timeout="60000"/>
+         <jgroupsConfig multiplexerStack="${jboss.default.jgroups.stack:udp}"/>
+         <!-- Choose sync or async -->
+         <async serializationExecutorPoolSize="0"/>
+         <!-- <sync replTimeout="17500"/> -->
+       
+         <buddy enabled="false" poolName="default" communicationTimeout="17500">
+            <dataGravitation auto="false" removeOnFind="true" searchBackupTrees="true"/>
+            <locator>
+            <properties>
+               numBuddies=1
+               ignoreColocatedBuddies=true
+            </properties>
+            </locator>
+          </buddy>
+       </clustering>
+       <listeners asyncPoolSize="0"/>
+       <jmxStatistics enabled="true"/>
+       
+       <loaders passivation="true" shared="false">
+          <loader class="org.jboss.cache.loader.FileCacheLoader" async="false" 
+             fetchPersistentState="true" purgeOnStartup="true">
+             <properties>
+             location=${jboss.server.data.dir}${/}session
+             ignoreModifications=false
+             checkCharacterPortability=false
+             </properties>
+          </loader>
+       </loaders> 
+    </cache-config>
+    
+    <cache-config name="field-granularity-session-cache">
+       <locking isolationLevel="REPEATABLE_READ" lockAcquisitionTimeout="15000" 
+             nodeLockingScheme="pessimistic" useLockStriping="false"/>
+       <transaction transactionManagerLookupClass="org.jboss.cache.transaction.BatchModeTransactionManagerLookup"/>
+       <serialization useRegionBasedMarshalling="true"/>
+       <startup regionsInactiveOnStartup="true"/>
+       <clustering clusterName="${jboss.partition.name:DefaultPartition}-FieldSessionCache" mode="replication">
+         <stateRetrieval fetchInMemoryState="true" timeout="60000"/>
+         <jgroupsConfig multiplexerStack="${jboss.default.jgroups.stack:udp}"/>
+         <!-- Choose sync or async -->
+         <async serializationExecutorPoolSize="0"/>
+         <!-- <sync replTimeout="17500"/> -->
+       
+         <buddy enabled="false" poolName="default" communicationTimeout="17500">
+            <dataGravitation auto="false" removeOnFind="true" searchBackupTrees="true"/>
+            <locator>
+            <properties>
+               numBuddies=1
+               ignoreColocatedBuddies=true
+            </properties>
+            </locator>
+          </buddy>
+       </clustering>
+       <listeners asyncPoolSize="0"/>
+       <jmxStatistics enabled="true"/>
+       
+       <loaders passivation="true" shared="false">
+          <loader class="org.jboss.cache.loader.FileCacheLoader" async="false" 
+             fetchPersistentState="true" purgeOnStartup="true">
+             <properties>
+             location=${jboss.server.data.dir}${/}field-session
+             ignoreModifications=false
+             checkCharacterPortability=false
+             </properties>
+          </loader>
+       </loaders>
+    </cache-config>
+    
+    <cache-config name="sfsb-cache">
+       <locking isolationLevel="REPEATABLE_READ" lockAcquisitionTimeout="15000" 
+             nodeLockingScheme="pessimistic" useLockStriping="false"/>
+       <transaction transactionManagerLookupClass="org.jboss.cache.transaction.BatchModeTransactionManagerLookup"/>
+       <serialization useRegionBasedMarshalling="false"/>
+       <startup regionsInactiveOnStartup="false"/>
+       <clustering clusterName="${jboss.partition.name:DefaultPartition}-SFSBCache" mode="replication">
+         <stateRetrieval fetchInMemoryState="true" timeout="60000"/>
+         <jgroupsConfig multiplexerStack="${jboss.default.jgroups.stack:udp}"/>
+         <!-- Choose sync or async -->
+         <async serializationExecutorPoolSize="0"/>
+         <!-- <sync replTimeout="17500"/> -->
+       
+         <buddy enabled="false" poolName="default" communicationTimeout="17500">
+            <dataGravitation auto="false" removeOnFind="true" searchBackupTrees="true"/>
+            <locator>
+            <properties>
+               numBuddies=1
+               ignoreColocatedBuddies=true
+            </properties>
+            </locator>
+          </buddy>
+       </clustering>
+       <listeners asyncPoolSize="0"/>
+       <jmxStatistics enabled="true"/>
+       
+       <loaders passivation="true" shared="false">
+          <loader class="org.jboss.cache.loader.FileCacheLoader" async="false" 
+             fetchPersistentState="true" purgeOnStartup="true">
+             <properties>
+             location=${jboss.server.data.dir}${/}sfsb
+             ignoreModifications=false
+             checkCharacterPortability=false
+             </properties>
+          </loader>
+       </loaders>
+       <eviction wakeUpInterval="5000">
+          <default algorithmClass="org.jboss.cache.eviction.NullEvictionAlgorithm"/>
+       </eviction>
+    </cache-config>
+    
+    <cache-config name="ha-partition">
+         <locking isolationLevel="REPEATABLE_READ" lockAcquisitionTimeout="15000" 
+             nodeLockingScheme="pessimistic" useLockStriping="false"/>
+       <transaction transactionManagerLookupClass="org.jboss.cache.transaction.BatchModeTransactionManagerLookup"/>
+       <serialization useRegionBasedMarshalling="false"/>
+       <startup regionsInactiveOnStartup="false"/>
+       <clustering clusterName="${jboss.partition.name:DefaultPartition}-HAPartitionCache" mode="replication">
+         <stateRetrieval fetchInMemoryState="true" timeout="60000"/>
+         <jgroupsConfig multiplexerStack="${jboss.default.jgroups.stack:udp}"/>
+         <sync replTimeout="17500"/>
+       </clustering>
+       <listeners asyncPoolSize="0"/>
+       <jmxStatistics enabled="true"/>
+    </cache-config>
+    
+    <cache-config name="mvcc-entity">  
+       <locking isolationLevel="READ_COMMITTED" lockAcquisitionTimeout="15000" 
+             nodeLockingScheme="mvcc" useLockStriping="false"/>
+       <serialization useRegionBasedMarshalling="true"/>
+       <startup regionsInactiveOnStartup="true"/>
+       <clustering clusterName="${jboss.partition.name:DefaultPartition}-mvcc-entity" mode="invalidation">
+         <stateRetrieval fetchInMemoryState="false" timeout="60000"/>
+         <jgroupsConfig multiplexerStack="${jboss.default.jgroups.stack:udp}"/>
+         <sync replTimeout="17500"/>
+       </clustering>
+       <listeners asyncPoolSize="0"/>
+       <jmxStatistics enabled="true"/>
+       <eviction wakeUpInterval="5000">
+          <default algorithmClass="org.jboss.cache.eviction.LRUAlgorithm">
+             <property name="maxNodes">10000</property>
+             <property name="timeToLiveSeconds">1000</property>
+             <property name="minTimeToLiveSeconds">120</property>
+          </default>
+          <region name="/TS" algorithmClass="org.jboss.cache.eviction.NullEvictionAlgorithm"/>
+       </eviction>
+    </cache-config>
+    
+    <cache-config name="optimistic-entity"> 
+       <locking isolationLevel="READ_COMMITTED" lockAcquisitionTimeout="15000" 
+             nodeLockingScheme="optimistic" useLockStriping="false"/>
+       <serialization useRegionBasedMarshalling="true"/>
+       <startup regionsInactiveOnStartup="true"/>
+       <clustering clusterName="${jboss.partition.name:DefaultPartition}-opt-entity" mode="invalidation">
+         <stateRetrieval fetchInMemoryState="false" timeout="60000"/>
+         <jgroupsConfig multiplexerStack="${jboss.default.jgroups.stack:udp}"/>
+         <sync replTimeout="17500"/>
+       </clustering>
+       <listeners asyncPoolSize="0"/>
+       <jmxStatistics enabled="true"/>
+       <eviction wakeUpInterval="5000">
+          <default algorithmClass="org.jboss.cache.eviction.LRUAlgorithm">
+             <property name="maxNodes">10000</property>
+             <property name="timeToLiveSeconds">1000</property>
+             <property name="minTimeToLiveSeconds">120</property>
+          </default>
+          <region name="/TS" algorithmClass="org.jboss.cache.eviction.NullEvictionAlgorithm"/>
+       </eviction>
+    </cache-config>
+    
+    <cache-config name="pessimistic-entity">
+       <locking isolationLevel="READ_COMMITTED" lockAcquisitionTimeout="15000" 
+             nodeLockingScheme="pessimistic" useLockStriping="false"/>
+       <serialization useRegionBasedMarshalling="true"/>
+       <startup regionsInactiveOnStartup="true"/>
+       <clustering clusterName="${jboss.partition.name:DefaultPartition}-pess-entity" mode="invalidation">
+         <stateRetrieval fetchInMemoryState="false" timeout="60000"/>
+         <jgroupsConfig multiplexerStack="${jboss.default.jgroups.stack:udp}"/>
+         <sync replTimeout="17500"/>
+       </clustering>
+       <listeners asyncPoolSize="0"/>
+       <jmxStatistics enabled="true"/>
+       <eviction wakeUpInterval="5000">
+          <default algorithmClass="org.jboss.cache.eviction.LRUAlgorithm">
+             <property name="maxNodes">10000</property>
+             <property name="timeToLiveSeconds">1000</property>
+             <property name="minTimeToLiveSeconds">120</property>
+          </default>
+          <region name="/TS" algorithmClass="org.jboss.cache.eviction.NullEvictionAlgorithm"/>
+       </eviction>
+    </cache-config>
+    
+    <cache-config name="mvcc-entity-repeatable">
+       <locking isolationLevel="REPEATABLE_READ" lockAcquisitionTimeout="15000" 
+             nodeLockingScheme="mvcc" useLockStriping="false"/>
+       <serialization useRegionBasedMarshalling="true"/>
+       <startup regionsInactiveOnStartup="true"/>
+       <clustering clusterName="${jboss.partition.name:DefaultPartition}-mvcc-entity-rr" mode="invalidation">
+         <stateRetrieval fetchInMemoryState="false" timeout="60000"/>
+         <jgroupsConfig multiplexerStack="${jboss.default.jgroups.stack:udp}"/>
+         <sync replTimeout="17500"/>
+       </clustering>
+       <listeners asyncPoolSize="0"/>
+       <jmxStatistics enabled="true"/>
+       <eviction wakeUpInterval="5000">
+          <default algorithmClass="org.jboss.cache.eviction.LRUAlgorithm">
+             <property name="maxNodes">10000</property>
+             <property name="timeToLiveSeconds">1000</property>
+             <property name="minTimeToLiveSeconds">120</property>
+          </default>
+          <region name="/TS" algorithmClass="org.jboss.cache.eviction.NullEvictionAlgorithm"/>
+       </eviction>
+    </cache-config>
+    
+    <cache-config name="pessimistic-entity-repeatable">
+       <locking isolationLevel="REPEATABLE_READ" lockAcquisitionTimeout="15000" 
+             nodeLockingScheme="pessimistic" useLockStriping="false"/>
+       <serialization useRegionBasedMarshalling="true"/>
+       <startup regionsInactiveOnStartup="true"/>
+       <clustering clusterName="${jboss.partition.name:DefaultPartition}-pess-entity-rr" mode="invalidation">
+         <stateRetrieval fetchInMemoryState="false" timeout="60000"/>
+         <jgroupsConfig multiplexerStack="${jboss.default.jgroups.stack:udp}"/>
+         <sync replTimeout="17500"/>
+       </clustering>
+       <listeners asyncPoolSize="0"/>
+       <jmxStatistics enabled="true"/>
+       <eviction wakeUpInterval="5000">
+          <default algorithmClass="org.jboss.cache.eviction.LRUAlgorithm">
+             <property name="maxNodes">10000</property>
+             <property name="timeToLiveSeconds">1000</property>
+             <property name="minTimeToLiveSeconds">120</property>
+          </default>
+          <region name="/TS" algorithmClass="org.jboss.cache.eviction.NullEvictionAlgorithm"/>
+       </eviction>
+    </cache-config>
+    
+    <cache-config name="local-query">   
+       <locking isolationLevel="READ_COMMITTED" lockAcquisitionTimeout="15000" 
+             nodeLockingScheme="mvcc" useLockStriping="false"/>
+       <serialization useRegionBasedMarshalling="true"/>
+       <startup regionsInactiveOnStartup="true"/>
+       <listeners asyncPoolSize="0"/>
+       <jmxStatistics enabled="true"/>
+       <eviction wakeUpInterval="5000">
+          <default algorithmClass="org.jboss.cache.eviction.LRUAlgorithm">
+             <property name="maxNodes">10000</property>
+             <property name="timeToLiveSeconds">1000</property>
+             <property name="minTimeToLiveSeconds">120</property>
+          </default>
+          <region name="/TS" algorithmClass="org.jboss.cache.eviction.NullEvictionAlgorithm"/>
+       </eviction>
+    </cache-config>
+    
+    <cache-config name="replicated-query">
+       <locking isolationLevel="READ_COMMITTED" lockAcquisitionTimeout="15000" 
+             nodeLockingScheme="mvcc" useLockStriping="false"/>
+       <serialization useRegionBasedMarshalling="true"/>
+       <startup regionsInactiveOnStartup="true"/>
+       <clustering clusterName="${jboss.partition.name:DefaultPartition}-query" mode="replication">
+         <stateRetrieval fetchInMemoryState="false" timeout="60000"/>
+         <jgroupsConfig multiplexerStack="${jboss.default.jgroups.stack:udp}"/>
+         <async serializationExecutorPoolSize="0"/>
+       </clustering>
+       <listeners asyncPoolSize="0"/>
+       <jmxStatistics enabled="true"/>
+       <eviction wakeUpInterval="5000">
+          <default algorithmClass="org.jboss.cache.eviction.LRUAlgorithm">
+             <property name="maxNodes">10000</property>
+             <property name="timeToLiveSeconds">1000</property>
+             <property name="minTimeToLiveSeconds">120</property>
+          </default>
+          <region name="/TS" algorithmClass="org.jboss.cache.eviction.NullEvictionAlgorithm"/>
+       </eviction>
+    </cache-config>
+    
+    <cache-config name="timestamps-cache">
+       <locking isolationLevel="READ_COMMITTED" lockAcquisitionTimeout="15000" 
+             nodeLockingScheme="mvcc" useLockStriping="false"/>
+       <serialization useRegionBasedMarshalling="true"/>
+       <startup regionsInactiveOnStartup="true"/>
+       <clustering clusterName="${jboss.partition.name:DefaultPartition}-timestamps" mode="replication">
+         <stateRetrieval fetchInMemoryState="true" timeout="60000"/>
+         <jgroupsConfig multiplexerStack="${jboss.default.jgroups.stack:udp}"/>
+         <async serializationExecutorPoolSize="0"/>
+       </clustering>
+       <listeners asyncPoolSize="0"/>
+       <jmxStatistics enabled="true"/>
+    </cache-config>
+    
+    <cache-config name="mvcc-shared">
+       <locking isolationLevel="READ_COMMITTED" lockAcquisitionTimeout="15000" 
+             nodeLockingScheme="mvcc" useLockStriping="false"/>
+       <serialization useRegionBasedMarshalling="true"/>
+       <startup regionsInactiveOnStartup="true"/>
+       <clustering clusterName="${jboss.partition.name:DefaultPartition}-mvcc-shared" mode="replication">
+         <stateRetrieval fetchInMemoryState="true" timeout="60000"/>
+         <jgroupsConfig multiplexerStack="${jboss.default.jgroups.stack:udp}"/>
+         <sync replTimeout="17500"/>
+       </clustering>
+       <listeners asyncPoolSize="0"/>
+       <jmxStatistics enabled="true"/>
+       <eviction wakeUpInterval="5000">
+          <default algorithmClass="org.jboss.cache.eviction.LRUAlgorithm">
+             <property name="maxNodes">10000</property>
+             <property name="timeToLiveSeconds">1000</property>
+             <property name="minTimeToLiveSeconds">120</property>
+          </default>
+          <region name="/TS" algorithmClass="org.jboss.cache.eviction.NullEvictionAlgorithm"/>
+       </eviction>
+    </cache-config>
+    
+    <cache-config name="optimistic-shared">
+       <locking isolationLevel="READ_COMMITTED" lockAcquisitionTimeout="15000" 
+             nodeLockingScheme="optimistic" useLockStriping="false"/>
+       <serialization useRegionBasedMarshalling="true"/>
+       <startup regionsInactiveOnStartup="true"/>
+       <clustering clusterName="${jboss.partition.name:DefaultPartition}-opt-shared" mode="replication">
+         <stateRetrieval fetchInMemoryState="true" timeout="60000"/>
+         <jgroupsConfig multiplexerStack="${jboss.default.jgroups.stack:udp}"/>
+         <sync replTimeout="17500"/>
+       </clustering>
+       <listeners asyncPoolSize="0"/>
+       <jmxStatistics enabled="true"/>
+       <eviction wakeUpInterval="5000">
+          <default algorithmClass="org.jboss.cache.eviction.LRUAlgorithm">
+             <property name="maxNodes">10000</property>
+             <property name="timeToLiveSeconds">1000</property>
+             <property name="minTimeToLiveSeconds">120</property>
+          </default>
+          <region name="/TS" algorithmClass="org.jboss.cache.eviction.NullEvictionAlgorithm"/>
+       </eviction>
+    </cache-config>
+    
+    <cache-config name="pessimistic-shared">
+       <locking isolationLevel="READ_COMMITTED" lockAcquisitionTimeout="15000" 
+             nodeLockingScheme="pessimistic" useLockStriping="false"/>
+       <serialization useRegionBasedMarshalling="true"/>
+       <startup regionsInactiveOnStartup="true"/>
+       <clustering clusterName="${jboss.partition.name:DefaultPartition}-pess-shared" mode="replication">
+         <stateRetrieval fetchInMemoryState="true" timeout="60000"/>
+         <jgroupsConfig multiplexerStack="${jboss.default.jgroups.stack:udp}"/>
+         <sync replTimeout="17500"/>
+       </clustering>
+       <listeners asyncPoolSize="0"/>
+       <jmxStatistics enabled="true"/>
+       <eviction wakeUpInterval="5000">
+          <default algorithmClass="org.jboss.cache.eviction.LRUAlgorithm">
+             <property name="maxNodes">10000</property>
+             <property name="timeToLiveSeconds">1000</property>
+             <property name="minTimeToLiveSeconds">120</property>
+          </default>
+          <region name="/TS" algorithmClass="org.jboss.cache.eviction.NullEvictionAlgorithm"/>
+       </eviction>
+    </cache-config>
+    
+    <cache-config name="mvcc-shared-repeatable">
+       <locking isolationLevel="REPEATABLE_READ" lockAcquisitionTimeout="15000" 
+             nodeLockingScheme="mvcc" useLockStriping="false"/>
+       <serialization useRegionBasedMarshalling="true"/>
+       <startup regionsInactiveOnStartup="true"/>
+       <clustering clusterName="${jboss.partition.name:DefaultPartition}-mvcc-shared-rr" mode="replication">
+         <stateRetrieval fetchInMemoryState="true" timeout="60000"/>
+         <jgroupsConfig multiplexerStack="${jboss.default.jgroups.stack:udp}"/>
+         <sync replTimeout="17500"/>
+       </clustering>
+       <listeners asyncPoolSize="0"/>
+       <jmxStatistics enabled="true"/>
+       <eviction wakeUpInterval="5000">
+          <default algorithmClass="org.jboss.cache.eviction.LRUAlgorithm">
+             <property name="maxNodes">10000</property>
+             <property name="timeToLiveSeconds">1000</property>
+             <property name="minTimeToLiveSeconds">120</property>
+          </default>
+          <region name="/TS" algorithmClass="org.jboss.cache.eviction.NullEvictionAlgorithm"/>
+       </eviction>
+    </cache-config>
+    
+    <cache-config name="pessimistic-shared-repeatable">
+       <locking isolationLevel="REPEATABLE_READ" lockAcquisitionTimeout="15000" 
+             nodeLockingScheme="pessimistic" useLockStriping="false"/>
+       <serialization useRegionBasedMarshalling="true"/>
+       <startup regionsInactiveOnStartup="true"/>
+       <clustering clusterName="${jboss.partition.name:DefaultPartition}-pess-shared-rr" mode="replication">
+         <stateRetrieval fetchInMemoryState="true" timeout="60000"/>
+         <jgroupsConfig multiplexerStack="${jboss.default.jgroups.stack:udp}"/>
+         <sync replTimeout="17500"/>
+       </clustering>
+       <listeners asyncPoolSize="0"/>
+       <jmxStatistics enabled="true"/>
+       <eviction wakeUpInterval="5000">
+          <default algorithmClass="org.jboss.cache.eviction.LRUAlgorithm">
+             <property name="maxNodes">10000</property>
+             <property name="timeToLiveSeconds">1000</property>
+             <property name="minTimeToLiveSeconds">120</property>
+          </default>
+          <region name="/TS" algorithmClass="org.jboss.cache.eviction.NullEvictionAlgorithm"/>
+       </eviction>
+    </cache-config>
+    
+</cache-configs>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- $Id: legacy-invokers-service.xml 98939 2009-12-28 04:42:52Z bstansberry@jboss.com $ -->
+
+<!-- ======================================================================= -->
+<!-- Legacy invokers to the JMX node                                         -->
+<!-- ======================================================================= -->
+<server>
+
+   <!-- RMI/JRMP invoker -->
+   <mbean code="org.jboss.invocation.jrmp.server.JRMPInvoker"
+      name="jboss:service=invoker,type=jrmp">
+      <attribute name="RMIObjectPort">
+         <value-factory bean="ServiceBindingManager" method="getIntBinding" parameter="jboss:service=invoker,type=jrmp"/>
+      </attribute>
+      <attribute name="ServerAddress">
+         <value-factory bean="ServiceBindingManager" method="getStringBinding" parameter="jboss:service=invoker,type=jrmp"/>
+      </attribute>
+      <!--
+      <attribute name="RMIClientSocketFactory">custom</attribute>
+      <attribute name="RMIServerSocketFactory">custom</attribute>
+      <attribute name="RMIServerSocketAddr">custom</attribute>
+      <attribute name="SecurityDomain">ssl-domain-name</attribute>
+      -->
+      <depends>jboss:service=TransactionManager</depends>
+   </mbean>
+
+   <mbean code="org.jboss.invocation.local.LocalInvoker"
+      name="jboss:service=invoker,type=local">
+
+      <depends>jboss:service=TransactionManager</depends>
+   </mbean>
+
+</server>

@@ -1,3 +1,14 @@
+- id: jboss
+  jdk: 6
+  main: org.jboss.Main
+  apps: [ jboss/bin,
+          jboss/client,
+          jboss/server ]
+  libs: [ jboss/common/lib,
+          jboss/lib ]
+  refl-log: jboss/refl.log
+  phantom: true
+
 - id: galleon
   jdk: 6
   main: org.lnicholls.galleon.server.Server
