@@ -2,10 +2,12 @@
   jdk: 6
   main: org.jboss.Main
   apps: [ jboss/bin,
-          jboss/client,
-          jboss/server ]
+          jboss/client ]
   libs: [ jboss/common/lib,
-          jboss/lib ]
+          jboss/lib,
+          jboss/server/minimal/lib,
+          jboss/server/default/lib,
+          jboss/server/all/lib, ]
   refl-log: jboss/refl.log
   phantom: true
 
