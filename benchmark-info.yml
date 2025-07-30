@@ -211,3 +211,80 @@
   apps: [ checkstyle/checkstyle-5.7-all.jar ]
   refl-log: checkstyle/refl.log
   phantom: true
+
+- id: kafka
+  jdk: 17
+  libs: []
+  phantom: true
+  refl-log: dacapo-23.11-MR2/dacapo-log/kafka/reflection.log
+  apps:
+    - dacapo-23.11-MR2/dacapo-23.11-MR2-chopin/jar/kafka
+    - dacapo-23.11-MR2/dacapo-23.11-MR2-chopin.jar
+  main: org.dacapo.harness.TestHarness
+
+- id: tomcat
+  jdk: 17
+  libs: []
+  phantom: true
+  refl-log: dacapo-23.11-MR2/dacapo-log/tomcat/reflection.log
+  apps:
+    - dacapo-23.11-MR2/dacapo-23.11-MR2-chopin/jar/tomcat
+    - dacapo-23.11-MR2/dacapo-23.11-MR2-chopin.jar
+  main: org.dacapo.harness.TestHarness
+
+- id: biojava
+  jdk: 17
+  libs: []
+  phantom: true
+  refl-log: dacapo-23.11-MR2/dacapo-log/biojava/reflection.log
+  apps:
+    - dacapo-23.11-MR2/dacapo-23.11-MR2-chopin/jar/biojava
+    - dacapo-23.11-MR2/dacapo-23.11-MR2-chopin.jar
+  main: org.dacapo.harness.TestHarness
+
+- id: renaissance-finagle-chirper
+  jdk: 17
+  main: org.renaissance.core.Launcher
+  phantom: true
+  apps:
+    - renaissance/renaissance-mit-0.16.0.jar
+  libs:
+    - renaissance/unique/twitter-finagle
+    - renaissance/shared/scala-library-2.13.15.jar
+    - renaissance/unique/renaissance-harness_2.13
+    - renaissance/unique/renaissance-core
+    - renaissance/shared/slf4j-simple-2.0.16.jar
+    - renaissance/shared/slf4j-api-2.0.16.jar
+    - renaissance/shared/scala-parallel-collections_2.13-1.0.4.jar
+    - renaissance/shared/scala-parser-combinators_2.13-2.4.0.jar
+    - renaissance/shared/scala-collection-compat_2.13-2.12.0.jar
+    - renaissance/shared/jackson-annotations-2.18.1.jar
+    - renaissance/shared/jackson-core-2.18.1.jar
+    - renaissance/shared/jackson-databind-2.18.1.jar
+    - renaissance/shared/jackson-module-scala_2.13-2.18.1.jar
+    - renaissance/shared/scala-reflect-2.13.15.jar
+    - renaissance/shared/paranamer-2.8.jar
+    - renaissance/shared/error_prone_annotations-2.28.0.jar
+    - renaissance/shared/j2objc-annotations-3.0.0.jar
+    - renaissance/shared/jsr305-3.0.2.jar
+    - renaissance/shared/failureaccess-1.0.2.jar
+    - renaissance/shared/checker-qual-3.43.0.jar
+    - renaissance/shared/caffeine-3.1.8.jar
+    - renaissance/shared/zstd-jni-1.5.6-7.jar
+    - renaissance/shared/guava-33.3.1-jre.jar
+    - renaissance/shared/netty-buffer-4.1.114.Final.jar
+    - renaissance/shared/netty-codec-4.1.114.Final.jar
+    - renaissance/shared/netty-codec-http-4.1.114.Final.jar
+    - renaissance/shared/netty-codec-http2-4.1.114.Final.jar
+    - renaissance/shared/netty-codec-socks-4.1.114.Final.jar
+    - renaissance/shared/netty-common-4.1.114.Final.jar
+    - renaissance/shared/netty-handler-4.1.114.Final.jar
+    - renaissance/shared/netty-handler-proxy-4.1.114.Final.jar
+    - renaissance/shared/netty-resolver-4.1.114.Final.jar
+    - renaissance/shared/netty-tcnative-classes-2.0.69.Final.jar
+    - renaissance/shared/netty-transport-4.1.114.Final.jar
+    - renaissance/shared/netty-transport-classes-epoll-4.1.114.Final.jar
+    - renaissance/shared/netty-transport-native-epoll-4.1.114.Final-linux-aarch_64.jar
+    - renaissance/shared/netty-transport-native-epoll-4.1.114.Final-linux-x86_64.jar
+    - renaissance/shared/netty-transport-native-unix-common-4.1.114.Final.jar
+  refl-log: renaissance/logs/finagle-chirper/reflection.log
