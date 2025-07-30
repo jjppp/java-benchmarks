@@ -102,6 +102,7 @@
   apps: [ dacapo-2006/hsqldb.jar ]
   libs: [ dacapo-2006/hsqldb-deps.jar ]
   refl-log: dacapo-2006/hsqldb-refl.log
+  phantom: true
 
 - id: jython
   jdk: 6
@@ -109,6 +110,7 @@
   apps: [ dacapo-2006/jython.jar ]
   libs: [ dacapo-2006/jython-deps.jar ]
   refl-log: dacapo-2006/jython-refl.log
+  phantom: true
 
 - id: luindex
   jdk: 6
@@ -194,12 +196,14 @@
   apps: [ briss/0.9/briss-0.9.jar ]
   libs: [ briss/0.9 ]
   refl-log: briss/0.9/refl.log
+  phantom: true
 
 - id: JPC
   jdk: 6
   main: org.jpc.j2se.JPCApplication
   apps: [ JPC/JPC.jar ]
   refl-log: JPC/refl.log
+  phantom: true
 
 - id: checkstyle
   jdk: 6
