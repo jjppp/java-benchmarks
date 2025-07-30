@@ -55,6 +55,8 @@ if [ -r "$RUN_CONF" ]; then
     . "$RUN_CONF"
 fi
 
+JAVA_OPTS="$JAVA_OPTS -javaagent:/home/wjp/poa-2.0.3.jar"
+
 # Force IPv4 on Linux systems since IPv6 doesn't work correctly with jdk5 and lower
 if [ "$linux" = "true" ]; then
    JAVA_OPTS="$JAVA_OPTS -Djava.net.preferIPv4Stack=true"
