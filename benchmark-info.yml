@@ -1,3 +1,75 @@
+- id: avrora
+  jdk: 8
+  main: Harness
+  apps: [ ./dacapo-bach/avrora.jar ]
+  libs: [ ./dacapo-bach/avrora-deps.jar ]
+  refl-log: ./dacapo-bach/avrora-tamiflex-default.log
+  phantom: true
+
+- id: tradebeans
+  jdk: 8
+  main: Harness
+  apps: [ ./dacapo-bach/tradebeans.jar]
+  libs: [ ./dacapo-bach/tradebeans-deps.jar ]
+  refl-log: ./dacapo-bach/tradebeans-tamiflex.log
+  phantom: true
+
+- id: batik-bach
+  jdk: 8
+  main: Harness
+  apps: [ ./dacapo-bach/batik.jar ]
+  libs: [ ./dacapo-bach/batik-deps.jar ]
+  refl-log: ./dacapo-bach/batik-tamiflex-default.log
+  phantom: true
+
+- id: h2-bach
+  jdk: 8
+  main: Harness
+  apps: [ ./dacapo-bach/h2.jar ]
+  libs: [ ./dacapo-bach/h2-deps.jar ]
+  refl-log: ./dacapo-bach/h2-tamiflex-default.log
+  phantom: true
+
+- id: luindex-bach
+  jdk: 8
+  main: Harness
+  apps: [ ./dacapo-bach/luindex.jar ]
+  libs: [ ./dacapo-bach/luindex-deps.jar ]
+  refl-log: ./dacapo-bach/luindex-tamiflex-default.log
+  phantom: true
+
+- id: lusearch-bach
+  jdk: 8
+  main: Harness
+  apps: [ ./dacapo-bach/lusearch.jar ]
+  libs: [ ./dacapo-bach/lusearch-deps.jar ]
+  refl-log: ./dacapo-bach/lusearch-tamiflex-default.log
+  phantom: true
+
+- id: pmd-bach
+  jdk: 8
+  main: Harness
+  apps: [ ./dacapo-bach/pmd.jar ]
+  libs: [ ./dacapo-bach/pmd-deps.jar ]
+  refl-log: ./dacapo-bach/pmd-tamiflex-default.log
+  phantom: true
+
+- id: sunflow-bach
+  jdk: 8
+  main: Harness
+  apps: [ ./dacapo-bach/sunflow.jar ]
+  libs: [ ./dacapo-bach/sunflow-deps.jar ]
+  refl-log: ./dacapo-bach/sunflow-tamiflex-default.log
+  phantom: true
+
+- id: xalan-bach
+  jdk: 8
+  main: Harness
+  apps: [ ./dacapo-bach/xalan.jar ]
+  libs: [ ./dacapo-bach/xalan-deps.jar ]
+  refl-log: ./dacapo-bach/xalan-tamiflex-default.log
+  phantom: true
+
 - id: jboss
   jdk: 6
   main: org.jboss.Main
